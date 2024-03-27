@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  - var IMG = ["forest.jpg", "guesthouse.jpg", "house.jpg", "ice.jpg", "swimming.jpg"]
+  - for (let i = 0; i < 3; i++)
+    - var random = Math.floor(Math.random()* 5)
+    - var selected_image = IMG[random]
+    img(src=`/images/${selected_image}`, `alt=Random Image ${i+1}`, height="300", width="300")
