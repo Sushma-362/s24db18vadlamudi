@@ -2,15 +2,14 @@ extends layout
 
 block content
   h1= title
-  - let results = [{Shoe_type:'running',Shoe_brand:'Nike',cost:100},{Shoe_type:'casual',Shoe_brand:'FILA',cost:150},{Shoe_type:'swimming',Shoe_brand:'aqua',cost:200}]
+  - let items = results
   div(class="container-fluid")
     div(class="row")
-      each item, index in results  
+      each item, index in items  
         div(class="col-sm-2",onclick=`buy(${index})`)
-          p #{item.Shoe_type} 
-          p #{item.Shoe_brand}
+          p #{item.shoe_type} 
+          p #{item.shoe_brand}
           p #{item.cost} 
-
   script.
     function buy(index) {
     alert("You purchased item " + index);}
