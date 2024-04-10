@@ -1,28 +1,28 @@
 extends layout
-
 block content
   h1= title
   if (toShow == null)
-    h2 No instance to update 
+    h2 No instance to update
   else 
+    
     - let shoeid = toShow._id
     - let shoe_type = toShow.shoe_type
+    - let shoecost = toShow.cost
     - let shoe_brand = toShow.shoe_brand
-    - let cost = toShow.cost
     div.row(class='mb-2')
       div.mr-1 ID is
       div #{shoeid}
     - let actionid = "/resource/shoe/" + shoeid
     form(id='shoeForm', action= actionid, method="PUT")
       div.form-group
-        label.shoeAttr(for='shoe_type') shoe type
+        label.shoeAttr(for='shoe_type') Shoe type
         input#shoe_type(type='text', name='shoe_type', value= shoe_type )
       div.form-group
-        label.shoeAttr(for='shoe_brand') shoe brand
+        label.shoeAttr(for='shoe_brand')  shoe brand
         input#shoe_brand(type='text', name='shoe_brand', value= shoe_brand )
       div.form-group
-        label.shoeAttr(for='cost') shoe cost
-        input#cost(type='number', name='cost', value= cost )
+        label.shoeAttr(for='cost') Costume cost
+        input#cost(type='number', name='cost', value= shoecost )
       input(type="submit")
     script.
       document.forms['shoeForm'].addEventListener('submit', (event) => {
@@ -34,10 +34,10 @@ block content
         }).then((resp) => {
           return resp.json(); // or resp.text() or whatever the server sends
         }).then((body) => {
-          alert("Update succeeded");
+          alert("Update succeded")
           // TODO handle body
         }).catch((error) => {
           // TODO handle error
-          alert("Update failed " + error);
+          alert("Update failed " + error )
         });
       });
