@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to update 
+  else 
+    - let shoeid = toShow._id
+    - let shoe_type = toShow.shoe_type
+    - let shoe_brand = toShow.shoe_brand
+    - let cost = toShow.cost
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{shoeid}
+    - let actionid = "/resource/shoe/" + shoeid
+    form(id='shoeForm', action= actionid, method="PUT")
+      div.form-group
+        label.shoeAttr(for='shoe_type') shoe type
+        input#shoe_type(type='text', name='shoe_type', value= shoe_type )
+      div.form-group
+        label.shoeAttr(for='shoe_brand') shoe brand
+        input#shoe_brand(type='text', name='shoe_brand', value= shoe_brand )
+      div.form-group
+        label.shoeAttr(for='cost') shoe cost
+        input#cost(type='number', name='cost', value= cost )
+      input(type="submit")
+    script.
+      document.forms['shoeForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show user that form is being submitted
+        fetch(event.target.action, {
+          method: 'PUT',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Update succeeded");
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Update failed " + error);
+        });
+      });

@@ -4,7 +4,7 @@ var router = express.Router();
 // Require controller modules.
 var api_controller = require('../controllers/api');
 var shoe_controller = require('../controllers/shoe');
-/// API ROUTE ///
+/// API ROUTE ///@
 // GET resources base.
 router.get('/', api_controller.api);
 /// shoe ROUTES ///

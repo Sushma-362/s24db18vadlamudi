@@ -1,0 +1,50 @@
+extends layout
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let shoeid = toShow._id
+    - let shoe_type = toShow.shoe_type
+    - let shoecost = toShow.cost
+    - let shoe_brand = toShow.shoe_brand
+    - let actionid = "/resource/shoe/" + shoeid
+    script.
+      let actionid = "#{actionid}"
+    div
+      div.row
+        div(class='shoeAttr mr-3') Shoe ID is:
+          div #{shoeid}
+      div.row
+        div(class='shoeAttr mr-3') Shoe Type is:
+          div #{shoe_type}
+      div.row
+        div(class='shoeAttr mr-3') shoe brand is:
+          div #{shoe_brand}
+      div.row
+        div(class='shoeAttr mr-3') shoe Cost is:
+          div #{shoecost}
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    script.
+      function cancel() {
+        // Go back to the home page for the costume collection
+        window.location.href='/shoe'
+      }
+    script.
+      function deleteOnid() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeded")
+          window.location.href='/shoe'
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error )
+        });
+      }
