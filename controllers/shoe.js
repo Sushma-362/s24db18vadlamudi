@@ -78,7 +78,7 @@ let toUpdate = await shoe.findById( req.params.id)
 // Do updates of properties
 if(req.body.shoe_type)
 toUpdate.shoe_type = req.body.shoe_type;
-if(req.body.shoe_brand) toUpdate.cost = req.body.shoe_brand;
+if(req.body.shoe_brand) toUpdate.shoe_brand = req.body.shoe_brand;
 if(req.body.cost) toUpdate.cost = req.body.cost;
 let result = await toUpdate.save();
 console.log("Sucess " + result)
